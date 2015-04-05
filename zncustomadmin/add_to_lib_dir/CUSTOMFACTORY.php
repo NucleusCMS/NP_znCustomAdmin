@@ -356,7 +356,7 @@ class PAGEFACTORY extends basePAGEFACTORY
 		// (note: this might contain doubles for overlapping contextids)
 		$aIdToValue = array();
 		$res = sql_query('SELECT oid, ovalue FROM ' . sql_table('plugin_option') . ' WHERE ocontextid=' . intval($contextid));
-		while ($o = mysql_fetch_object($res)) {
+		while ($o = sql_fetch_object($res)) {
 			$aIdToValue[$o->oid] = $o->ovalue;
 		}
 		// get list of oids per pid
@@ -364,7 +364,7 @@ class PAGEFACTORY extends basePAGEFACTORY
 			   . ' WHERE opid=pid and ocontext=\''.addslashes($context).'\' and pfile=\''.$plugName.'\' ORDER BY porder, oid ASC';
 		$res = sql_query($query);
 		$aOptions = array();
-		while ($o = mysql_fetch_object($res)) {
+		while ($o = sql_fetch_object($res)) {
 			if (in_array($o->oid, array_keys($aIdToValue)))
 				$value = $aIdToValue[$o->oid];
 			else
@@ -410,12 +410,12 @@ class PAGEFACTORY extends basePAGEFACTORY
 		//
 		$sql_str = "SELECT * FROM ".$znItemFieldEX->table_table.$tname." WHERE id=".$itemid;
 		$qid = sql_query($sql_str);
-		if ($qid and @mysql_num_rows($qid) > 0) $row_item = mysql_fetch_array($qid);
+		if ($qid and @sql_num_rows($qid) > 0) $row_item = sql_fetch_array($qid);
 		
 		$ftid = $znItemFieldEX->getIDFromTableName($tname);
 		$sql_str = "SELECT * FROM ".$znItemFieldEX->table_fields." WHERE ftid='".$ftid."' AND fname='".$fname."' ORDER BY forder";
 		$qid = sql_query($sql_str);
-		$row = mysql_fetch_array($qid);
+		$row = sql_fetch_array($qid);
 		echo ($row) ? '' : 'specified field name was not found.<br />';
 		if ($row["ftype"] == 'Image' && $this->ifexImgJsFlag === FALSE) {
 			$znItemFieldEX->printImgJs();
@@ -502,7 +502,7 @@ class PAGEFACTORY extends basePAGEFACTORY
 				echo '<option value="newcat-',$iForcedBlogInclude,'">',_ADD_NEWCAT,'</option>';
 		}
 		$categories = sql_query('SELECT cname, catid FROM '.sql_table('category').' WHERE cblog=' . $iForcedBlogInclude . ' ORDER BY cname ASC');
-		while ($oCat = mysql_fetch_object($categories)) {
+		while ($oCat = sql_fetch_object($categories)) {
 			if ($oCat->catid == $selected)
 				$selectText = ' selected="selected" ';
 			else

@@ -180,7 +180,7 @@ class NP_znCustomAdmin extends NucleusPlugin
 						t.tcontent='NP_znCustomAdmin'";
 				$qid = sql_query($query);
 				$skinSelectStr = 'default|';
-				while ($row = mysql_fetch_array($qid)) $skinSelectStr .= '|'.$row['tdname'].'|'.$row['tdname'];
+				while ($row = sql_fetch_array($qid)) $skinSelectStr .= '|'.$row['tdname'].'|'.$row['tdname'];
 				sql_query("UPDATE ".sql_table("plugin_option_desc")." SET oextra='".addslashes($skinSelectStr)."' WHERE oid in (".implode(',', $oidArray).")");
 				break;
 			case 'def': //....
