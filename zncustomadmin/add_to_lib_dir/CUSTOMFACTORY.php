@@ -151,12 +151,8 @@ class ADMINFACTORY extends BaseActions
 			echo $this->template['sqmenuhead'];
 			
 			$aPluginExtras = array();
-			$manager->notify(
-				'QuickMenu',
-				array(
-					'options' => &$aPluginExtras
-				)
-			);
+			$params = array('options' => &$aPluginExtras);
+			$manager->notify('QuickMenu',$params);
 			if (count($aPluginExtras) > 0)
 			{
 				foreach ($aPluginExtras as $aInfo)
@@ -383,7 +379,8 @@ class PAGEFACTORY extends basePAGEFACTORY
 			));
 		}
 		global $manager;
-		$manager->notify('PrePluginOptionsEdit',array('context' => $context, 'contextid' => $contextid, 'options'=>&$aOptions));
+		$params = array('context' => $context, 'contextid' => $contextid, 'options'=>&$aOptions);
+		$manager->notify('PrePluginOptionsEdit',$params);
 		$iPrevPid = -1;
 		foreach ($aOptions as $aOption) {
 			// new plugin?

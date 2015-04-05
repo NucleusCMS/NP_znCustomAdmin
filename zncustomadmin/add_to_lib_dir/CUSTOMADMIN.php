@@ -8,7 +8,8 @@ class ADMIN extends baseADMIN
 	function pagehead($extrahead = '')
 	{
 		global $manager;
-		$manager->notify('AdminPrePageHead', array('extrahead' => &$extrahead, 'action' => $this->action));
+		$params = array('extrahead' => &$extrahead, 'action' => $this->action);
+		$manager->notify('AdminPrePageHead', $params);
 		$this->adminfactoryParser('defaultPagehead', 'HEADER', $extrahead);
 	}
 	/**
@@ -17,7 +18,8 @@ class ADMIN extends baseADMIN
 	function pagefoot()
 	{
 		global $manager;
-		$manager->notify('AdminPrePageFoot', array('action' => $this->action));
+		$params = array('action' => $this->action);
+		$manager->notify('AdminPrePageFoot', $params);
 		$this->adminfactoryParser('defaultPagefoot', 'FOOTER');
 	}
 	/**
@@ -51,7 +53,8 @@ class ADMIN extends baseADMIN
 		$blogid = getBlogIDFromItemID($itemid);
 		$blog =& $manager->getBlog($blogid);
 		
-		$manager->notify('PrepareItemForEdit', array('item' => &$item));
+		$params = array('item' => &$item);
+		$manager->notify('PrepareItemForEdit', $params);
 		if ($blog->convertBreaks()) {
 			$item['body'] = removeBreaks($item['body']);
 			$item['more'] = removeBreaks($item['more']);
@@ -221,7 +224,8 @@ class ADMIN extends baseADMIN
 			}
 
 			$aPluginExtras = array();
-			$manager->notify('QuickMenu', array('options' => &$aPluginExtras));
+			$params = array('options' => &$aPluginExtras);
+			$manager->notify('QuickMenu', $params);
 			if (count($aPluginExtras) > 0) {
 				$defaultFooter .= '
 					<h2>'. _QMENU_PLUGINS. '</h2>
