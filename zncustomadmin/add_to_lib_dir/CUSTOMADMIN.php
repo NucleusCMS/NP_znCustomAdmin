@@ -91,7 +91,7 @@ class ADMIN extends baseADMIN
 		$actions->setTemplate($parseTemplate);
 		$parser->parse($content);
 		
-		//echo '[['.htmlspecialchars($extrahead, ENT_QUOTES).']]';
+		//echo '[['.hsc($extrahead, ENT_QUOTES).']]';
 	}
 	/**
 	 * defaultPagehead
@@ -99,13 +99,13 @@ class ADMIN extends baseADMIN
 	function defaultPagehead($extrahead = '')
 	{
 		global $member, $nucleus, $CONF;
-		$baseUrl = htmlspecialchars($CONF['AdminURL']);
+		$baseUrl = hsc($CONF['AdminURL']);
 		$defaultHeader = '
 			<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 			<html xmlns="http://www.w3.org/1999/xhtml">
 			<head>
 				<meta http-equiv="Content-Type" content="text/html; charset='._CHARSET.'" />
-				<title>'.htmlspecialchars($CONF['SiteName']).' - Admin</title>
+				<title>'.hsc($CONF['SiteName']).' - Admin</title>
 				<link rel="stylesheet" title="Nucleus Admin Default" type="text/css" href="'.$baseUrl.'styles/admin.css" />
 				<link rel="stylesheet" title="Nucleus Admin Default" type="text/css" href="'.$baseUrl.'styles/addedit.css" />
 				<script type="text/javascript" src="'.$baseUrl.'javascript/edit.js"></script>
@@ -118,7 +118,7 @@ class ADMIN extends baseADMIN
 			</head>
 			<body>
 			<div class="header">
-			<h1>'.htmlspecialchars($CONF['SiteName']).'</h1>
+			<h1>'.hsc($CONF['SiteName']).'</h1>
 			</div>
 			<div id="container">
 			<div id="content">
@@ -228,7 +228,7 @@ class ADMIN extends baseADMIN
 					<ul>';
 				foreach ($aPluginExtras as $aInfo)
 				{
-					$defaultFooter .= '<li><a href="'.htmlspecialchars($aInfo['url']).'" title="'.htmlspecialchars($aInfo['tooltip']).'">'.htmlspecialchars($aInfo['title']).'</a></li>';
+					$defaultFooter .= '<li><a href="'.hsc($aInfo['url']).'" title="'.hsc($aInfo['tooltip']).'">'.hsc($aInfo['title']).'</a></li>';
 				}
 				$defaultFooter .= '</ul>';
 			}

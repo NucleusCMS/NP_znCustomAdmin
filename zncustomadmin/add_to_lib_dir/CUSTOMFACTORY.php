@@ -108,12 +108,12 @@ class ADMINFACTORY extends BaseActions
 	function parse_sitename()
 	{
 		global $CONF;
-		echo htmlspecialchars($CONF['SiteName']);
+		echo hsc($CONF['SiteName']);
 	}
 	function parse_adminurl()
 	{
 		global $CONF;
-		echo htmlspecialchars($CONF['AdminURL']);
+		echo hsc($CONF['AdminURL']);
 	}
 	function parse_extrahead()
 	{
@@ -161,12 +161,12 @@ class ADMINFACTORY extends BaseActions
 			{
 				foreach ($aPluginExtras as $aInfo)
 				{
-					//echo '<li><a href="'.htmlspecialchars($aInfo['url']).'" title="'.htmlspecialchars($aInfo['tooltip']).'">'.htmlspecialchars($aInfo['title']).'</a></li>';
+					//echo '<li><a href="'.hsc($aInfo['url']).'" title="'.hsc($aInfo['tooltip']).'">'.hsc($aInfo['title']).'</a></li>';
 					//<li><a href="<%url%>" title="<%tooltip%>"><%title%></a></li>
 					$qInfo = array(
-						'url'     => htmlspecialchars($aInfo['url']    , ENT_QUOTES),
-						'tooltip' => htmlspecialchars($aInfo['tooltip'], ENT_QUOTES),
-						'title'   => htmlspecialchars($aInfo['title']  , ENT_QUOTES),
+						'url'     => hsc($aInfo['url']    , ENT_QUOTES),
+						'tooltip' => hsc($aInfo['tooltip'], ENT_QUOTES),
+						'title'   => hsc($aInfo['title']  , ENT_QUOTES),
 					);
 					echo TEMPLATE::fill($qmenu, $qInfo);
 				}
@@ -183,7 +183,7 @@ class ADMINFACTORY extends BaseActions
 	function parse_donate($linktext = '')
 	{
 		$u        = 'http://nucleuscms.org/donate.php';
-		$linktext = htmlspecialchars($linktext);
+		$linktext = hsc($linktext);
 		$l = ($linktext) ? '<a href="'.$u.'" title="'.$linktext.'">'.$linktext.'</a>' : $u;
 		echo $l;
 	}
@@ -294,7 +294,7 @@ class PAGEFACTORY extends basePAGEFACTORY
 				$itemid = $this->variables['itemid'];
 				$query  = "SELECT mrealname AS result FROM ".sql_table('item')." AS i,".sql_table('member')." AS m  WHERE m.mnumber=i.iauthor AND inumber=".intval($itemid);
 				$disp   = quickQuery($query);
-				echo htmlspecialchars($disp, ENT_QUOTES);
+				echo hsc($disp, ENT_QUOTES);
 				break;
 		}
 	}
@@ -463,7 +463,7 @@ class PAGEFACTORY extends basePAGEFACTORY
 	function parse_customhelplinklib()
 	{
 		global $CONF;
-		echo '<script type="text/javascript" src="'.htmlspecialchars($CONF['PluginURL'], ENT_QUOTES).'zncustomadmin/wz_tooltip.js"></script>';
+		echo '<script type="text/javascript" src="'.hsc($CONF['PluginURL'], ENT_QUOTES).'zncustomadmin/wz_tooltip.js"></script>';
 	}
 	/**
 	 * <%customhelplink(helpid, BGCOLOR:#ffffff&BORDERCOLOR:#c0b070)%>
@@ -507,7 +507,7 @@ class PAGEFACTORY extends basePAGEFACTORY
 				$selectText = ' selected="selected" ';
 			else
 				$selectText = '';
-			echo '<option value="',$oCat->catid,'" ', $selectText,'>',htmlspecialchars($oCat->cname),'</option>';
+			echo '<option value="',$oCat->catid,'" ', $selectText,'>',hsc($oCat->cname),'</option>';
 		}
 		echo '</select>';
 	}
