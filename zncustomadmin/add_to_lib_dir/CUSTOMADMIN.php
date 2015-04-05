@@ -35,7 +35,7 @@ class ADMIN extends baseADMIN
 		$blog =& $manager->getBlog($blogid);
 		
 		$this->pagehead();
-		$formfactory = & new PAGEFACTORY($blogid);
+		$formfactory = new PAGEFACTORY($blogid);
 		$formfactory->createAddForm('admin');
 		$this->pagefoot();
 	}
@@ -61,7 +61,7 @@ class ADMIN extends baseADMIN
 		}
 		
 		$this->pagehead();
-		$formfactory = & new PAGEFACTORY($blog->getID());
+		$formfactory = new PAGEFACTORY($blog->getID());
 		$formfactory->createEditForm('admin', $item);
 		$this->pagefoot();
 	}
