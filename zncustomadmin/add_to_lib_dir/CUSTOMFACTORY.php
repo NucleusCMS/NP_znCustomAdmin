@@ -195,9 +195,13 @@ class ADMINFACTORY extends BaseActions
 class PAGEFACTORY extends basePAGEFACTORY
 {
 	
-	function PAGEFACTORY($blogid)
+	public function PAGEFACTORY($blogid) { $this->__construct($blogid);  }
+	function __construct($blogid)
 	{
-		parent::PAGEFACTORY($blogid);
+		if (method_exists(get_parent_class(), '__construct'))
+		  parent::__construct($blogid);
+		else
+		  parent::PAGEFACTORY($blogid);
 	}
 	/**
 	 * 
@@ -252,7 +256,7 @@ class PAGEFACTORY extends basePAGEFACTORY
 	function zncaGetTemplateFor($type, $method)
 	{
 		/*
-		$formfactory         = & new PAGEFACTORY(0);
+		$formfactory         = new PAGEFACTORY(0);
 		$formfactory->type   = $type;
 		$formfactory->method = $method;
 		return $formfactory->getTemplateFor('');
